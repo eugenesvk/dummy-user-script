@@ -3,15 +3,19 @@ name       	= "user_script_wasm"
 version    	= "0.1.0"
 description	= "Demo of using wasm module generated with Rust in a JS user script loaded in Violentmonkey"
 authors    	= ["es"]
-categories 	= ["wasm"]
+categories 	= ["wasm","user script"]
 readme     	= "README.md"
 license    	= "MIT"
 edition    	= "2021"
 
 [workspace]
 
+[lib]
+crate-type 	= ["cdylib"]
+
 [dependencies]
-wasm-bindgen	= "0.2.74"
+wasm-bindgen            	= "0.2.74"
+console_error_panic_hook	= "0.1.6"
 
 log      	= "0.4"
 stderrlog	= "0.5"
