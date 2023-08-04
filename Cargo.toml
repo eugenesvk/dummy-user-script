@@ -16,6 +16,7 @@ crate-type 	= ["cdylib"]
 [dependencies]
 wasm-bindgen            	= "0.2.74"
 console_error_panic_hook	= "0.1.6"
+web-sys                 	= {version="0.3.64",features=['console']}
 
 log      	= "0.4"
 stderrlog	= "0.5"
