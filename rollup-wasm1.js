@@ -1,5 +1,5 @@
 import path      	from 'path';
-import {wasm}    	from '@rollup/plugin-wasm';
+import {wasm}    	from '@rollup/plugin-wasm' // bundle wasm as base64 strings
 import userscript	from 'rollup-plugin-userscript';
 import pkg       	from './package.json' assert {type:'json'};
 
