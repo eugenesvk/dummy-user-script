@@ -12,6 +12,11 @@ const is_watch = !!process.env.ROLLUP_WATCH;
 const DIST    	= 'dist';
 const FILENAME	= 'wasm1';
 
+const terserOpt = {
+  format    	: {
+    comments	: "all", // preserve UserScript comments |some| keeps JSDoc-style comments that contain "@license", "@copyright", "@preserve" or start with ! ¦true¦all¦ preserve all comments ¦false¦ omit comments, a regular expression string (e.g. /^!/) or a function
+  },
+}
 const rustOpt = {
   inlineWasm     	: true      	,// inline `.wasm` into `.js` Slower, size +33%, but no separate `.wasm` file. `true` → `serverPath` `nodejs` `importHook` ignored
   serverPath     	: "js/"     	,// server dir to load `.wasm` from. This is prepended to the URL, so you should put a / at the end of the directory, for example "/foo/".
@@ -46,7 +51,7 @@ plugins	: [
   rust(rustOpt),
   is_watch && serve({contentBase:"dist",open:true,}),
   is_watch && livereload("dist"),
- !is_watch && terser(),
+ !is_watch && terser(terserOpt),
   userscript(path.resolve('src/UserScript meta.js'),meta => meta
     .replace('process.env.VERSION', pkg.version)
     .replace('process.env.AUTHOR' , pkg.author ))
