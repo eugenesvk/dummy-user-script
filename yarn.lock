@@ -1579,9 +1579,6 @@ __metadata:
     rollup-plugin-livereload: ^2.0.5
     rollup-plugin-serve: ^2.0.2
     rollup-plugin-userscript: ^0.1.1
-  dependenciesMeta:
-    rollup-plugin-userscript@0.1.1:
-      unplugged: true
   languageName: unknown
   linkType: soft
 
