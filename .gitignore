@@ -114,3 +114,7 @@ secrets.*.js
 rollup.config-*.mjs
 rollup.*.mjs
 
+# Rust
+/callgrind.out.justfile
+/dist
+/target

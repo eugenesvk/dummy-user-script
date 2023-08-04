@@ -1,0 +1,19 @@
+[package]  # help on keys doc.rust-lang.org/cargo/reference/manifest.html
+name   	= "{{project-name}}"
+version	= "0.1.0"
+authors	= ["{{authors}}"]
+edition	= "2021"
+
+[dependencies]
+log      	= "0.4"
+stderrlog	= "0.5"
+anyhow   	= "1.0"
+faccess  	= "0.2"
+
+[profile.release]
+# opt        	for      	size
+strip        	= true   	# Auto strip symbols from the binary (included by default on Linux/macOS)
+opt-level    	= "z"    	# |3|     optimize for size
+lto          	= true   	# |false| Sets link-time optimization.
+codegen-units	= 1      	# |16|    reduce parallel code generation
+panic        	= "abort"	# |unwind| save ~20k w/o drop-on-panic cleanup and std::panic::catch_unwind
