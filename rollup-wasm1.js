@@ -2,6 +2,13 @@ import path      	from 'path';
 import {wasm}    	from '@rollup/plugin-wasm' // bundle wasm as base64 strings
 import userscript	from 'rollup-plugin-userscript';
 import pkg       	from './package.json' assert {type:'json'};
+//               	Rust build
+import rust      	from "@wasm-tool/rollup-plugin-rust"
+import serve     	from "rollup-plugin-serve"
+import livereload	from "rollup-plugin-livereload"
+import {terser}  	from "@rollup/plugin-terser"
+
+const is_watch = !!process.env.ROLLUP_WATCH;
 
 const DIST    	= 'dist';
 const FILENAME	= 'wasm1';
@@ -26,6 +33,17 @@ let bundleOpt = {
   indent                 	: false,
   // externalLiveBindings	: false, // with false circular dependencies and live bindings for external imports won't work
 }
+
+const cfg1 =[{
+input  	: {index:"./Cargo.toml",},
+output 	: {dir:"dist/js",format:"iife",sourcemap:true,},
+plugins	: [
+  rust({serverPath:"js/",}),
+  is_watch && serve({contentBase:"dist",open:true,}),
+  is_watch && livereload("dist"),
+ !is_watch && terser(),
+],
+}]
 
 const cfg = {
 input  	: 'src/wasm1.js',
