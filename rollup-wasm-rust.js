@@ -41,7 +41,7 @@ let bundleOpt = {
 
 const cfg =[{
 input  	: {'index.user':"./Cargo.toml",},
-output 	: {format:"iife",dir:`${DIST}/js`,sourcemap:true,},
+output 	: {format:"iife",dir:`${DIST}/js`},
 plugins	: [
   rust(rustOpt),
   is_watch && serve({contentBase:"dist",open:true,}),
