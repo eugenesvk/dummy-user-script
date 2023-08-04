@@ -29,7 +29,7 @@ let bundleOpt = {
 
 const cfg = {
 input  	: 'src/wasm1.js',
-output 	: {format:'cjs',file:`${DIST}/js/${FILENAME}.user.js`
+output 	: {format:'es',file:`${DIST}/js/${FILENAME}.user.js`
  ,     	   globals:{...bundleOpt},sourcemap:true,},
 plugins	: [wasm(wasmOpt),
   userscript(path.resolve('src/UserScript meta.js'),meta => meta
