@@ -113,4 +113,5 @@ secrets.*.js
 # dev temp files
 rollup.config-*.mjs
 rollup.*.mjs
+*.js.map
 
