@@ -1,4 +1,12 @@
 {
-  "name": "dummy",
-  "packageManager": "yarn@3.6.1"
+  "name": "user_script_wasm",
+  "version": "0.1.0",
+  "author": "es",
+  "packageManager": "yarn@3.6.1",
+  "private": true,
+  "scripts": {
+    "b": "rimraf -g 'dist/js/*' && rollup --bundleConfigAsCjs --config rollup-wasm-rust.js",
+    "w": "rimraf -g 'dist/js/*' && rollup --bundleConfigAsCjs --config rollup-wasm-rust.js --watch",
+    "t": "rimraf -g 'dist/js/*' && rollup --bundleConfigAsCjs --config rollup-wasm1.js"
+  },
 }
