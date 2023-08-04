@@ -113,6 +113,7 @@ secrets.*.js
 # dev temp files
 rollup.config-*.mjs
 rollup.*.mjs
+*.js.map
 
 # Rust
 /callgrind.out.justfile
