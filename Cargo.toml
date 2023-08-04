@@ -1,10 +1,18 @@
 [package]  # help on keys doc.rust-lang.org/cargo/reference/manifest.html
-name   	= "{{project-name}}"
-version	= "0.1.0"
-authors	= ["{{authors}}"]
-edition	= "2021"
+name       	= "user_script_wasm"
+version    	= "0.1.0"
+description	= "Demo of using wasm module generated with Rust in a JS user script loaded in Violentmonkey"
+authors    	= ["es"]
+categories 	= ["wasm"]
+readme     	= "README.md"
+license    	= "MIT"
+edition    	= "2021"
+
+[workspace]
 
 [dependencies]
+wasm-bindgen	= "0.2.74"
+
 log      	= "0.4"
 stderrlog	= "0.5"
 anyhow   	= "1.0"
