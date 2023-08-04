@@ -115,3 +115,7 @@ rollup.config-*.mjs
 rollup.*.mjs
 *.js.map
 
+# Rust
+/callgrind.out.justfile
+/dist
+/target
