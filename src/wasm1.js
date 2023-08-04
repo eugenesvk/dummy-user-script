@@ -1,3 +1,20 @@
+import * as std from './std.js';
+const p = std.p
+p('a')
+
+import wasm1 from './wasm/wasm1_42.wasm'
+import wasm2 from './wasm/wasm2_44_log44.wasm'
+const wasmMem = new WebAssembly.Memory({ initial: 10, maximum: 100 })
+const wasmOpt = {
+  // js: {mem:wasmMem},
+  env         	:{ // env is default from wasmfiddle, not imports
+    import_log	: (arg) => console.log(arg)
+  }
+};
+
+wasm1({}     ).then(({ instance }) => {console.log(instance.exports.main())})
+wasm2(wasmOpt).then(({ instance }) => {console.log(instance.exports.main())})
+
 /*
 // ↓ added via userscript rollup plugin to make Violentmonkey recognize this as a user script
 // ==UserScript==
@@ -73,17 +90,14 @@ void import_log(int arg);
 int main() {import_log(44);return 44;}
 → (import "env" "import_log" (func $import_log (param i32)))
 so use 'env' instead of 'imports' in JS
+
+
+// basic async/await test
+function resolveAfter2Seconds(x) {
+  return new Promise((resolve) => {setTimeout(() => {resolve(x)}, 2000)})}
+async function f1() {
+  const x = await resolveAfter2Seconds(10);
+  console.log(x); // 10
+}
+f1();
 */
-
-import wasm1 from './wasm/wasm1_42.wasm'
-import wasm2 from './wasm/wasm2_44_log44.wasm'
-const wasmMem = new WebAssembly.Memory({ initial: 10, maximum: 100 })
-const wasmOpt = {
-  // js: {mem:wasmMem},
-  env         	:{ // env is default from wasmfiddle, not imports
-    import_log	: (arg) => console.log(arg)
-  }
-};
-
-wasm1({}     ).then(({ instance }) => {console.log(instance.exports.main())})
-wasm2(wasmOpt).then(({ instance }) => {console.log(instance.exports.main())})
