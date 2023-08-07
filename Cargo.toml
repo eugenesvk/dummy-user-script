@@ -24,9 +24,9 @@ anyhow   	= "1.0"
 faccess  	= "0.2"
 
 [profile.release]
-# opt        	for      	size
-strip        	= true   	# Auto strip symbols from the binary (included by default on Linux/macOS)
-opt-level    	= "z"    	# |3|     optimize for size
-lto          	= true   	# |false| Sets link-time optimization.
-codegen-units	= 1      	# |16|    reduce parallel code generation
-panic        	= "abort"	# |unwind| save ~20k w/o drop-on-panic cleanup and std::panic::catch_unwind
+# opt        	for       	size
+strip        	= true    	# Auto strip symbols from the binary (included by default on Linux/macOS)
+opt-level    	= "z"     	# |3|     optimize for size
+lto          	= true    	# |false| Sets link-time optimization.
+codegen-units	= 1       	# |16|    reduce parallel code generation
+panic        	= "unwind"	# abort|unwind| save ~20k w/o drop-on-panic cleanup and std::panic::catch_unwind
