@@ -16,9 +16,25 @@ crate-type 	= ["cdylib"]
 [dependencies]
 wasm-bindgen            	= "0.2.74"
 console_error_panic_hook	= "0.1.6"
-web-sys                 	= {version="0.3.64",features=['console','EventTarget']}
-gloo                    	= "0.9.0"
-# gloo                  	= {version="0.9.0",features=['console','events']}
+web-sys                 	= {version="0.3.64",features=['console','EventTarget',
+  'Window',
+  'Document',
+  'Element',
+  'Node',
+  'CanvasRenderingContext2d',
+  'CssStyleDeclaration',
+  'EventTarget',
+  'HtmlCanvasElement',
+  'HtmlTextAreaElement',
+  'HtmlParagraphElement',
+  'HtmlButtonElement',
+  'HtmlElement',
+  'KeyboardEvent',
+  'MouseEvent',
+  'console',
+]}
+gloo  	= "0.9.0"
+# gloo	= {version="0.9.0",features=['console','events']}
 
 log      	= "0.4"
 stderrlog	= "0.5"
