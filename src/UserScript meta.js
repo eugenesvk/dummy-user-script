@@ -3,7 +3,7 @@
 // @namespace   Violentmonkey Scripts
 // @description This is a userscript built from Violentmonkey template
 // @match       http://example.com/
-// @grant       GM_addStyle
+// @grant       none
 // @version     process.env.VERSION
 // @author      process.env.AUTHOR
 // @require     https://cdn.jsdelivr.net/combine/npm/@violentmonkey/dom@2,npm/@violentmonkey/ui@0.7
