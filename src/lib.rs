@@ -17,6 +17,25 @@ impl      EventListenerAlias    for EventListener {
   //fn   forget(mut self) {self.callback.take().unwrap_throw().forget()}
   }
 
+pub trait KeyboardEventAlias { // add wrapper trait to allow using better names
+  fn phys_key	(&self) -> String;
+  fn phys    	(&self) -> String;
+  fn isShift 	(&self) -> bool;
+  fn isCtrl  	(&self) -> bool;
+  fn isMeta  	(&self) -> bool;
+  fn isAlt   	(&self) -> bool;
+  fn isHeld   	(&self) -> bool;
+  }
+impl      KeyboardEventAlias    for KeyboardEvent {
+  fn phys_key	(&self) -> String {self.code     	()}
+  fn phys    	(&self) -> String {self.code     	()}
+  fn isShift 	(&self) -> bool   {self.shift_key	()}
+  fn isCtrl  	(&self) -> bool   {self.ctrl_key 	()}
+  fn isMeta  	(&self) -> bool   {self.meta_key 	()}
+  fn isAlt   	(&self) -> bool   {self.alt_key  	()}
+  fn isHeld  	(&self) -> bool   {self.repeat   	()}
+  }
+
 #[wasm_bindgen(start)] fn run() -> Result<(),JsValue> {
   #[cfg(debug_assertions)]console_error_panic_hook::set_once(); // better error messages in debug mode, disabled in release mode so it doesn't bloat up the file size
   let _ = evt_listener_keydown_gloo();
