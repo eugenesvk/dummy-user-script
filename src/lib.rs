@@ -9,6 +9,14 @@ use web                  	::{KeyboardEvent, KeyboardEvent as KEvt};
 use gloo                 	::{events::EventListener, timers::callback::Timeout};
   // gloo::events::EventListener › RAII type which is used to manage DOM event listeners. When the EventListener is dropped, it will automatically deregister the event listener and clean up the closure’s memory
 
+pub trait EventListenerAlias { // add wrapper trait to allow using better names
+  fn keep_alive(self);
+  }
+impl      EventListenerAlias    for EventListener {
+  fn keep_alive(mut self) {self.forget()}
+  //fn   forget(mut self) {self.callback.take().unwrap_throw().forget()}
+  }
+
 #[wasm_bindgen(start)] fn run() -> Result<(),JsValue> {
   #[cfg(debug_assertions)]console_error_panic_hook::set_once(); // better error messages in debug mode, disabled in release mode so it doesn't bloat up the file size
   let _ = evt_listener_keydown_gloo();
