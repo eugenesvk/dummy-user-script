@@ -41,6 +41,7 @@ stderrlog	= "0.5"
 anyhow   	= "1.0"
 faccess  	= "0.2"
 js-sys = "0.3.64"
+enum-iterator = "1.4.1"
 
 [profile.release]
 # opt        	for       	size
