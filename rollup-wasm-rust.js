@@ -17,16 +17,17 @@ const terserOpt = {
     comments	: "all", // preserve UserScript comments |some| keeps JSDoc-style comments that contain "@license", "@copyright", "@preserve" or start with ! ¦true¦all¦ preserve all comments ¦false¦ omit comments, a regular expression string (e.g. /^!/) or a function
   },
 }
+let wasmOptArgs = is_watch? ["-O","-g"] : ["-O"] // ‘g’ preserve debug symbols
 const rustOpt = {
-  inlineWasm     	: true      	,// inline `.wasm` into `.js` Slower, size +33%, but no separate `.wasm` file. `true` → `serverPath` `nodejs` `importHook` ignored
-  serverPath     	: "js/"     	,// server dir to load `.wasm` from. This is prepended to the URL, so you should put a / at the end of the directory, for example "/foo/".
-  nodejs         	: false     	,// whether code will be run in Node (which doesn't support `fetch`)
-  debug          	: false     	,// debug/release build (watch mode = debug)
-  verbose        	: false     	,// display extra compilation information in the console
-  cargoArgs      	: []        	,// extra args to `cargo build`
-  wasmBindgenArgs	: []        	,// extra args to `wasm-bindgen`
-  wasmOptArgs    	: ["-O"]    	,//       args to `wasm-opt`
-  watchPatterns  	: ["src/**"]	,// files for watch mode. Relative to Cargo.toml, syntax npmjs.com/package/glob
+  inlineWasm     	: false      	,// inline `.wasm` into `.js` Slower, size +33%, but no separate `.wasm` file. `true` → `serverPath` `nodejs` `importHook` ignored
+  serverPath     	: "js/"      	,// server dir to load `.wasm` from. This is prepended to the URL, so you should put a / at the end of the directory, for example "/foo/".
+  nodejs         	: false      	,// whether code will be run in Node (which doesn't support `fetch`)
+  debug          	: false      	,// debug/release build (watch mode = debug)
+  verbose        	: false      	,// display extra compilation information in the console
+  cargoArgs      	: []         	,// extra args to `cargo build`
+  wasmBindgenArgs	: []         	,// extra args to `wasm-bindgen`
+  wasmOptArgs    	: wasmOptArgs	,//       args to `wasm-opt`
+  watchPatterns  	: ["src/**"] 	,// files for watch mode. Relative to Cargo.toml, syntax npmjs.com/package/glob
   importHook     	: function (path) { return JSON.stringify(path)},  // customize the behavior for loading the .wasm file (advanced)
   experimental   	: {    	//
     directExports	: false	,// Changes the way that the modules are generated from ↓ (might need to set the Rollup `format` to "es" or "system")
@@ -44,8 +45,8 @@ let bundleOpt = {
   // externalLiveBindings	: false, // with false circular dependencies and live bindings for external imports won't work
 }
 
-const cfg =[{
-input  	: {'index.user':"./Cargo.toml",},
+const cfg =[
+{input 	: {'index.user':"./Cargo.toml",},
 output 	: {format:"es",dir:`${DIST}/js`},
 plugins	: [
   rust(rustOpt),
@@ -56,6 +57,7 @@ plugins	: [
     .replace('process.env.VERSION', pkg.version)
     .replace('process.env.AUTHOR' , pkg.author ))
   ]
-}]
+},
+]
 
 export default cfg
