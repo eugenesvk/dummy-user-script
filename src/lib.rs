@@ -24,7 +24,7 @@ pub trait KeyboardEventAlias { // add wrapper trait to allow using better names
   fn isCtrl  	(&self) -> bool;
   fn isMeta  	(&self) -> bool;
   fn isAlt   	(&self) -> bool;
-  fn isHeld   	(&self) -> bool;
+  fn isHeld  	(&self) -> bool;
   }
 impl      KeyboardEventAlias    for KeyboardEvent {
   fn phys_key	(&self) -> String {self.code     	()}
