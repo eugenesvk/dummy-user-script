@@ -2,7 +2,8 @@
 // @name        Inlined wasm @ example.com
 // @namespace   Violentmonkey Scripts
 // @description This is a userscript built from Violentmonkey template
-// @match       http://example.com/
+// @match       *://github.com/*
+// @match       *://example.com/*
 // @grant       none
 // @version     process.env.VERSION
 // @author      process.env.AUTHOR
