@@ -51,6 +51,32 @@ macro_rules! p { // macro that's like `println!` (std eats all output, so it doe
   ($($t:tt)*) => (log(&format_args!($($t)*).to_string()))
 }
 
+use enum_iterator::{all, cardinality, first, last, next, previous, reverse_all, Sequence};
+#[derive(Debug,Clone,PartialEq,Sequence)] pub enum UserAgentOS {Win,Mac,Linux,NA}
+impl UserAgentOS {
+  const fn val(&self) -> &'static str {
+    use UserAgentOS::*;
+    match self {
+      NA   	=> "unknown",
+      Win  	=> "windows ",
+      Mac  	=> "mac os x",
+      Linux	=> "linux",
+    }
+  }
+}
+use std::fmt;
+impl fmt::Display for UserAgentOS {
+  fn fmt(&self, f:&mut fmt::Formatter) -> fmt::Result {
+    use UserAgentOS::*;
+    match self {
+      NA   	=> write!(f,"{}", "NA:"   	.to_owned()	+ (NA   	.val())),
+      Win  	=> write!(f,"{}", "Win:"  	.to_owned()	+ (Win  	.val())),
+      Mac  	=> write!(f,"{}", "Mac:"  	.to_owned()	+ (Mac  	.val())),
+      Linux	=> write!(f,"{}", "Linux:"	.to_owned()	+ (Linux	.val())),
+    }
+  }
+}
+
 fn evt_listener_keydown_gloo(){ // create a keydown event using the EventListener Struct and bind it with a HTML textarea element. Whenever a key is entered with the keyboard on the textarea, the keyboard event type and key is set as the text content of a paragraph element
   let win 	= web::window() .expect("should have a window in this context");
   let doc 	= win.document().expect("window should have a document");
